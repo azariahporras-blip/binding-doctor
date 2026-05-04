@@ -1,5 +1,9 @@
 # Binding Doctor
 
+[![npm version](https://img.shields.io/npm/v/binding-doctor.svg)](https://www.npmjs.com/package/binding-doctor)
+[![npm downloads](https://img.shields.io/npm/dm/binding-doctor.svg)](https://www.npmjs.com/package/binding-doctor)
+[![license](https://img.shields.io/npm/l/binding-doctor.svg)](./LICENSE)
+
 > Wrangler ships your code. Doctor wires your stack.
 
 `bdr` is a CLI **and** an MCP server that reconciles Cloudflare bindings between your code, your `wrangler.toml`, and your account. It lets an AI agent (Claude Code, Codex, etc.) take a Worker from `env.CHAT_DB` to a deployed app **without ever asking you to copy a database ID**.
