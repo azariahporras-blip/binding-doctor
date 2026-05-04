@@ -64,7 +64,7 @@ Plug `bdr-mcp` into Claude Code → the agent's loop becomes:
 
 Zero human in the middle. Zero ID copying.
 
-90s demo: <asciinema link>
+90s demo: https://asciinema.org/a/dYDfRnAlD7Cdzsth
 
 **7/**
 This belongs in `wrangler` itself. Maybe `wrangler doctor`. Maybe `wrangler deploy --auto-bind`.
@@ -93,7 +93,7 @@ I'm Diogo de Bastos — physics PhD, data scientist, building on Cloudflare. I s
 
 **What I built.** `binding-doctor` (`bdr`) — a CLI and an MCP server that does a three-way diff (declared / referenced / live) and applies it idempotently. Empty Worker → one command → resources created, IDs written back, D1 migrations applied, ready to deploy. Delete a resource out-of-band, re-run, drift healed.
 
-- 90s demo: <asciinema link>
+- 90s demo: https://asciinema.org/a/dYDfRnAlD7Cdzsth
 - Repo: https://github.com/diogodebastos/binding-doctor
 - Blog post (1100 words): <blog link>
 
@@ -124,7 +124,7 @@ declared (wrangler.toml) vs referenced (env.X in code) vs live (CF API)
 → idempotent apply: create missing D1/R2/KV/Queue/Vectorize, write IDs back, run pending migrations
 ```
 
-Demo: <asciinema link>. It also detects + heals drift when a resource is deleted out-of-band.
+Demo: https://asciinema.org/a/dYDfRnAlD7Cdzsth. It also detects + heals drift when a resource is deleted out-of-band.
 
 A few questions for the team / community:
 

@@ -85,6 +85,8 @@ Wrote 3 bindings to wrangler.toml.
 Migrations [CHAT_DB]: applied 0001_init.sql
 ```
 
+90-second cast: [asciinema.org/a/dYDfRnAlD7Cdzsth](https://asciinema.org/a/dYDfRnAlD7Cdzsth).
+
 It's idempotent. Re-run, zero diff. Delete the KV namespace from the dashboard, re-run, drift detected, drift healed. Same as Terraform — but for a Worker project, in one command, with no state file, because the wrangler config *is* the state file.
 
 There's also an MCP server (`bdr-mcp`) that exposes `bdr_diff`, `bdr_plan`, `bdr_apply`, `bdr_migrate` as tools. Plug it into Claude Code, and now the agent's loop becomes:
@@ -118,8 +120,8 @@ Three reasons it belongs in the platform:
 
 `bdr` is on GitHub: github.com/diogodebastos/binding-doctor. MIT-licensed. The 90-second demo is in the repo. PRs welcome — vectorize is functional but the dimensions/metric should come from a code annotation, queues should auto-wire consumers when a `queue` handler is found, secrets need a `.env.doctor` template path. All weekend-2 work.
 
-I'd love to build the next version of this inside Cloudflare. The agent-first pitch I keep hearing in the keynotes is the pitch I want to ship. If anyone reading this knows the right person — DevRel, Workers, Agents — I'm at \<your-email\>.
+I'd love to build the next version of this inside Cloudflare. The agent-first pitch I keep hearing in the keynotes is the pitch I want to ship. If anyone reading this knows the right person — DevRel, Workers, Agents — I'm at diogodebastos18@gmail.com.
 
 ---
 
-*Thanks for reading. The repo: github.com/diogodebastos/binding-doctor. The asciinema cast: \<link\>.*
+*Thanks for reading. The repo: [github.com/diogodebastos/binding-doctor](https://github.com/diogodebastos/binding-doctor). The 90-second demo: [asciinema.org/a/dYDfRnAlD7Cdzsth](https://asciinema.org/a/dYDfRnAlD7Cdzsth).*

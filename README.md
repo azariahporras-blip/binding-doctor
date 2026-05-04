@@ -37,42 +37,71 @@ Idempotent. One command. No manual ID copying.
 
 ## Install
 
+### Zero-install (recommended)
+
 ```sh
-git clone https://github.com/diogodebastos/binding-doctor
-cd binding-doctor
-npm install
-npm run build
-npm link    # exposes `bdr` and `bdr-mcp` globally
+npx -p binding-doctor bdr diff
 ```
 
-Set credentials (token needs `D1:Edit`, `R2:Edit`, `Workers KV Storage:Edit`, `Queues:Edit`, `Vectorize:Edit`):
+`bdr` and `bdr-mcp` both resolve via `npx` from the npm registry.
+
+### Global install
 
 ```sh
-echo "CLOUDFLARE_API_TOKEN=…" >> .env
-echo "CLOUDFLARE_ACCOUNT_ID=…" >> .env
+npm install -g binding-doctor
+bdr diff
+```
+
+### Credentials
+
+Create an API token at <https://dash.cloudflare.com/profile/api-tokens> with these scopes:
+**D1:Edit · R2:Edit · Workers KV Storage:Edit · Queues:Edit · Vectorize:Edit · Account Settings:Read**.
+
+Drop into `.env` in your Worker project:
+
+```
+CLOUDFLARE_API_TOKEN=...
+CLOUDFLARE_ACCOUNT_ID=...
 ```
 
 ## CLI
 
 ```sh
-bdr diff [dir]      # show diff
-bdr plan [dir]      # preview actions
-bdr apply [dir] --yes
-bdr migrate [dir]   # run pending D1 migrations only
+bdr diff [dir]            # three-way binding diff
+bdr plan [dir]            # preview actions
+bdr apply [dir] --yes     # create + writeback + run migrations
+bdr migrate [dir]         # run pending D1 migrations only
 ```
 
-## MCP
+## MCP — wire into Claude Code
 
-Wire into Claude Code (`.claude/mcp.json` or settings):
+Add to `.claude/mcp.json` (or your client's MCP config):
 
-```json
+```jsonc
+{
+  "mcpServers": {
+    "binding-doctor": {
+      "command": "npx",
+      "args": ["-y", "-p", "binding-doctor", "bdr-mcp"],
+      "env": {
+        "CLOUDFLARE_API_TOKEN": "...",
+        "CLOUDFLARE_ACCOUNT_ID": "..."
+      }
+    }
+  }
+}
+```
+
+Or, if globally installed:
+
+```jsonc
 {
   "mcpServers": {
     "binding-doctor": {
       "command": "bdr-mcp",
       "env": {
-        "CLOUDFLARE_API_TOKEN": "…",
-        "CLOUDFLARE_ACCOUNT_ID": "…"
+        "CLOUDFLARE_API_TOKEN": "...",
+        "CLOUDFLARE_ACCOUNT_ID": "..."
       }
     }
   }
@@ -81,7 +110,11 @@ Wire into Claude Code (`.claude/mcp.json` or settings):
 
 Tools exposed: `bdr_diff`, `bdr_plan`, `bdr_apply`, `bdr_migrate`.
 
-Now Claude can write code referencing `env.NEW_THING`, call `bdr_apply`, and ship — zero human ID copying.
+The agent's loop becomes: **write code → bdr_apply → ship**. Zero human ID copying.
+
+### Why local, not remote
+
+The MCP runs on your machine because it reads your local `wrangler.toml` and scans your source tree — your code is the desired state. A hosted Worker can't see your filesystem. (See `BLOG.md` for the design rationale.)
 
 ## Binding kind inference
 
