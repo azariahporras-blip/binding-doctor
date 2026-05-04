@@ -1,0 +1,9 @@
+node_modules
+dist
+.env
+.env.*
+!.env.example
+.DS_Store
+demo/wrangler.toml
+demo/wrangler.toml.bak
+test-fixture/wrangler.toml.bak

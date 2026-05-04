@@ -1,0 +1,20 @@
+name = "bdr-fixture"
+main = "src/index.ts"
+compatibility_date = "2026-01-01"
+
+[[d1_databases]]
+binding = "CHAT_DB"
+database_name = "bdr-fixture-chat-db-8i6x"
+database_id = "9c48b532-6e50-4632-808c-3419a3b1069f"
+
+[[queues.producers]]
+binding = "EVENTS_QUEUE"
+queue = "bdr-fixture-events-queue-kjmv"
+
+[[kv_namespaces]]
+binding = "SESSIONS_KV"
+id = "0230f53107484d7da1987ad25f5b376f"
+
+[[r2_buckets]]
+binding = "UPLOADS_BUCKET"
+bucket_name = "bdr-fixture-uploads-bucket-s000"
